@@ -1,7 +1,7 @@
 from enum import Enum
 import re
-from src.htmlnode import HTMLNode
-from src.inline import text_to_children
+from htmlnode import HTMLNode
+from inline import text_to_children
 
 
 class BlockType(Enum):

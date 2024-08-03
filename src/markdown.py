@@ -1,6 +1,6 @@
 import re
-from src.block import block_to_html_node
-from src.htmlnode import HTMLNode
+from block import block_to_html_node
+from htmlnode import HTMLNode
 
 
 def markdown_to_blocks(markdown):
@@ -16,3 +16,11 @@ def markdown_to_blocks(markdown):
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
     return HTMLNode("div", children=[block_to_html_node(block) for block in blocks])
+
+
+def extract_title(markdown):
+    blocks = markdown_to_blocks(markdown)
+    for block in blocks:
+        if block.startswith("# "):
+            return block[2:].strip()
+    raise ValueError("Could not find title in markdown")

@@ -1,6 +1,6 @@
 import unittest
-from src.block import block_to_block_type, block_to_html_node, BlockType
-from src.htmlnode import HTMLNode
+from block import block_to_block_type, block_to_html_node, BlockType
+from htmlnode import HTMLNode
 
 
 class TestBlock(unittest.TestCase):

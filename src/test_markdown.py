@@ -1,7 +1,7 @@
 import unittest
 import textwrap
-from src.markdown import markdown_to_blocks, markdown_to_html_node
-from src.htmlnode import HTMLNode
+from markdown import markdown_to_blocks, markdown_to_html_node, extract_title
+from htmlnode import HTMLNode
 
 
 class TestMarkdown(unittest.TestCase):
@@ -48,6 +48,11 @@ class TestMarkdown(unittest.TestCase):
             ])
         ])
         self.assertEqual(markdown_to_html_node(self.text), expected)
+
+    def test_extract_markdown(self):
+        self.assertEqual(extract_title(self.text), "This is a heading")
+        with self.assertRaises(ValueError):
+            extract_title("test")
 
 
 if __name__ == '__main__':

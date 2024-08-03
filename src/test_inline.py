@@ -1,8 +1,8 @@
 import unittest
-from src.textnode import TextNode, TextType
-from src.inline import (text_to_textnodes, split_nodes_delimiter, split_nodes_image, split_nodes_link,
+from textnode import TextNode, TextType
+from inline import (text_to_textnodes, split_nodes_delimiter, split_nodes_image, split_nodes_link,
                         extract_markdown_links, extract_markdown_images, text_to_children)
-from src.htmlnode import HTMLNode
+from htmlnode import HTMLNode
 
 
 class TestInline(unittest.TestCase):

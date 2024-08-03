@@ -1,5 +1,5 @@
-from src.textnode import TextNode, TextType
 import re
+from textnode import TextNode, TextType
 
 
 def text_to_children(text):
