@@ -40,7 +40,7 @@ def block_to_html_node(block):
                 create_from_content("code", re.sub(r"^```|```$", "", block))
             ])
         case BlockType.QUOTE:
-            content = re.sub(r"^>", "", block, flags=re.MULTILINE)
+            content = re.sub(r"^>\s", "", block, flags=re.MULTILINE)
             return create_from_content("blockquote", content)
         case BlockType.UNORDERED_LIST:
             items = re.sub(r"^\*\s|^-\s", "", block, flags=re.MULTILINE).splitlines()

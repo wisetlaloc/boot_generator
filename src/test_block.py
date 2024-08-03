@@ -8,8 +8,8 @@ class TestBlock(unittest.TestCase):
         self.assertEqual(block_to_block_type("# test"), BlockType.HEADING)
         self.assertEqual(block_to_block_type("```test```"), BlockType.CODE)
         self.assertEqual(block_to_block_type("```python\nprint('hello world')\n```"), BlockType.CODE)
-        self.assertEqual(block_to_block_type(">test\n>test2"), BlockType.QUOTE)
-        self.assertEqual(block_to_block_type(">test\n```"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("> test\n> test2"), BlockType.QUOTE)
+        self.assertEqual(block_to_block_type("> test\n```"), BlockType.PARAGRAPH)
         self.assertEqual(block_to_block_type("* aaa\n- bbb"), BlockType.UNORDERED_LIST)
         self.assertEqual(block_to_block_type("* aaa\n bbb"), BlockType.PARAGRAPH)
         self.assertEqual(block_to_block_type("1. aaa\n2. bbb"), BlockType.ORDERED_LIST)
@@ -31,7 +31,7 @@ class TestBlock(unittest.TestCase):
                          ]))
 
         # BlockType.QUOTE
-        self.assertEqual(block_to_html_node(">First Quote\n>Second quote"),
+        self.assertEqual(block_to_html_node("> First Quote\n> Second quote"),
                          HTMLNode("blockquote", "First Quote\nSecond quote"))
 
         # BlockType.UNORDERED_LIST
