@@ -1,6 +1,7 @@
 from enum import Enum
 import re
-from htmlnode import HTMLNode
+from parentnode import ParentNode
+from leafnode import LeafNode
 from inline import text_to_children
 
 
@@ -35,7 +36,7 @@ def block_to_html_node(block):
             tag, content = _tag_and_content_in_header(block)
             return create_from_content(tag, content)
         case BlockType.CODE:
-            return HTMLNode("pre", children=[
+            return ParentNode("pre", children=[
                 create_from_content("code", re.sub(r"^```|```$", "", block))
             ])
         case BlockType.QUOTE:
@@ -43,10 +44,10 @@ def block_to_html_node(block):
             return create_from_content("blockquote", content)
         case BlockType.UNORDERED_LIST:
             items = re.sub(r"^\*\s|^-\s", "", block, flags=re.MULTILINE).splitlines()
-            return HTMLNode("ul", children=[create_from_content("li", item) for item in items])
+            return ParentNode("ul", children=[create_from_content("li", item) for item in items])
         case BlockType.ORDERED_LIST:
             items = re.sub(r"^\d\.\s*", "", block, flags=re.MULTILINE).splitlines()
-            return HTMLNode("ol", children=[create_from_content("li", item) for item in items])
+            return ParentNode("ol", children=[create_from_content("li", item) for item in items])
         case BlockType.PARAGRAPH:
             return create_from_content("p", block)
     raise ValueError(f"Unknown block type: {block_type}")
@@ -55,9 +56,9 @@ def block_to_html_node(block):
 def create_from_content(tag, content, props=None):
     children = text_to_children(content)
     if len(children) == 1:
-        return HTMLNode(tag, children[0].value, None, props)
+        return LeafNode(tag, children[0].value, None)
     else:
-        return HTMLNode(tag, None, children, props)
+        return ParentNode(tag, children, props)
 
 
 def _tag_and_content_in_header(block):

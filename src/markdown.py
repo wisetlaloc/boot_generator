@@ -1,6 +1,6 @@
 import re
 from block import block_to_html_node
-from htmlnode import HTMLNode
+from parentnode import ParentNode
 
 
 def markdown_to_blocks(markdown):
@@ -15,7 +15,7 @@ def markdown_to_blocks(markdown):
 
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
-    return HTMLNode("div", children=[block_to_html_node(block) for block in blocks])
+    return ParentNode("div", children=[block_to_html_node(block) for block in blocks])
 
 
 def extract_title(markdown):
